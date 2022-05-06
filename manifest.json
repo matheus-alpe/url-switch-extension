@@ -1,0 +1,17 @@
+{
+    
+    "name": "Switch",
+    "description": "A simple redirect extension.",
+    "manifest_version": 2,
+    "version": "1.0.0",
+    "permissions": [ "webRequest", "webRequestBlocking", "\u003Call_urls>", "tabs" ],
+    "background": {
+        "scripts": [ "/src/js/background.js" ]
+     },
+    "browser_action": {
+        "default_icon": "/src/assets/icons/switch.png",
+        "default_popup": "/src/pages/popup.html",
+        "default_title": "Add redirect rules."
+    }
+ }
+ 
