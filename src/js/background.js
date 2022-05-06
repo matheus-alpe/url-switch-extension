@@ -1,10 +1,17 @@
-/**
- * Todo:
- *  [x] Listen to request
- *  [x] Rules definition
- *  [ ] CRUD of rules
- *  [ ] Create a function that handle request redirect
- */
+import { storage } from './utils';
+
+storage.set('rules', [
+    {
+        from: '//www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
+        to: '//i.pinimg.com/originals/78/cf/3e/78cf3eee0658dbf205e821f5a31db5e3.png',
+        active: true,
+    },
+    {
+        from: '//www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png',
+        to: '//i.pinimg.com/originals/78/cf/3e/78cf3eee0658dbf205e821f5a31db5e3.png',
+        active: true,
+    },
+]);
 
 /**
  * @typedef {Object} Rule
@@ -12,20 +19,30 @@
  * @property {string} to - Specific URL
  * @property {boolean} active - Determines whether the rule is active
  */
-const rule = {
-    from: '//www.google.com.br/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png',
-    to: '//i.pinimg.com/originals/78/cf/3e/78cf3eee0658dbf205e821f5a31db5e3.png',
-    active: true,
-};
 
-const requestHandler = function (details) {
+/**
+ * @type {Rule[]}
+ */
+const rules = [];
+
+chrome.tabs.onActivated.addListener(() => {
+    storage.get('rules').then((response) => {
+        console.log('connected!', response);
+    });
+});
+
+function requestHandler(details) {
     // test on https://www.google.com.br/
-    if (rule.active && details.url.includes(rule.from)) {
-        return {
-            redirectUrl: details.url.replace(rule.from, rule.to),
-        };
+    const matchedRule = rules.find((rule) => details.url.includes(rule.from));
+
+    if (!matchedRule || !matchedRule.active) {
+        return;
     }
-};
+
+    return {
+        redirectUrl: details.url.replace(matchedRule.from, matchedRule.to),
+    };
+}
 
 const RequestConfig = {
     filter: {
