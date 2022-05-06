@@ -1,0 +1,32 @@
+{
+    "name": "chrome-extension-switch",
+    "version": "1.0.0",
+    "description": "Simple redirect extension - Working with [Manifest V2](https://developer.chrome.com/docs/extensions/mv2/manifest/)",
+    "main": "./src/js/background.js",
+    "scripts": {
+        "dev": "webpack -w",
+        "clean": "rm -rf node_modules package-lock.json"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.17.10",
+        "babel-loader": "^8.2.5",
+        "webpack": "^5.72.0",
+        "webpack-cli": "^4.9.2"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/matheus-alpe/switch-extension.git"
+    },
+    "keywords": [
+        "Chrome",
+        "Extension",
+        "Redirect",
+        "Browser"
+    ],
+    "author": "",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/matheus-alpe/switch-extension/issues"
+    },
+    "homepage": "https://github.com/matheus-alpe/switch-extension#readme"
+}
