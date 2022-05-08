@@ -4,25 +4,30 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="../../dist/bundle.css">
         <title>Switch</title>
     </head>
     <body>
-        <h3>Add redirect rule: </h3>
-    <div id="rules">Redirect Rule
-        <ul></ul>
-    </div>
+        <main class="mdc-card rs-card">
+            <h6 class="rs-title">Redirect switch</h6>
+            <div id="rules">Redirect Rule
+                <ul></ul>
+            </div>
 
-    <div id="add-rule">  
-        <label for="from">
-            From:
-            <input type="text" id="from">
-        </label>
-        <label for="to">
-            To:
-            <input type="text" id="to">
-        </label>
-        <button type="submit" id="submit">Add</button>
-    </div>
+            <div id="add-rule">  
+                <label for="from">
+                    From:
+                    <input type="text" id="from">
+                </label>
+                <label for="to">
+                    To:
+                    <input type="text" id="to">
+                </label>
+                <button type="submit" id="submit">Add</button>
+            </div>
+            
+        </main>
     </body>
+    <script src="../../dist/app.js"></script>
     <script src="../../dist/popup.js"></script>
 </html>

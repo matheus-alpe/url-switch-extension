@@ -24,7 +24,8 @@ submitBtn.addEventListener('click', (e) => {
     let newRule = {
         "from": from,
         "to": to,
-        active: true
+        active: true,
+        isEditing: false
     }
 
     rules.push(newRule);
@@ -47,9 +48,9 @@ function refreshRules() {
             var li = 
             `
                 <li class="${rule.active ? 'active' : ''}" data-rule-index="${i}">
-                    <input class="from" title="${rule.from}" disabled value="${rule.from}" />
+                    <input class="from" title="${rule.from}" ${rule.isEditing ? '' : 'disabled'} value="${rule.from}" />
                     <span class="seperator">&gt;</span>
-                    <input class="to" title="${rule.to}" disabled value="${rule.to}" />
+                    <input class="to" title="${rule.to}" ${rule.isEditing ? '' : 'disabled'} value="${rule.to}" />
                     <input type="checkbox" class="checkbox" name="active" ${checked} />
                     <a href="#" class="editRuleButton" >Edit</a>
                     <a href="#" class="removeRuleButton">Remove</a>
@@ -74,7 +75,8 @@ function bindEventActions() {
     function clickEditAction(e) {
         var li = e.target.parentElement;
         var index = Number(li.getAttribute('data-rule-index'));
-
+        rules[index].isEditing = !rules[index].isEditing;
+        updateRules();
     }
 
     var editButtons =  rulesUl.querySelectorAll('.editRuleButton');
