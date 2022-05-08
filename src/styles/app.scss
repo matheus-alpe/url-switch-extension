@@ -1,16 +1,16 @@
-@use "@material/card";
+@use '@material/card';
 
 @include card.core-styles;
 
 .rs-card {
-  width: 445px;
-  padding: 1em;
+    width: 445px;
+    padding: 1em;
 }
 
 .rs-title {
-  font-size: 1em;
-  line-height: 1.5;
-
+    font-size: 1em;
+    line-height: 1.5;
 }
 
-@import "normalize";
+@import 'normalize';
+@import 'variables';
