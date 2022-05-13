@@ -33,27 +33,32 @@ submitBtn.addEventListener('click', (e) => {
     refreshRules();
 })
 
-function updateRules() {
-    storage.set('rules', rules);
-    refreshRules();
-}
-
 function refreshRules() {
     rulesUl.innerHTML = '';
 
     if(rules.length) {
         for (var i = 0; i < rules.length; i++) {
             var rule = rules[i];
+            var active = rule.active ? 'active' : '';
             var checked = rule.active ? 'checked="checked"' : '';
+            var disabled = rule.isEditing ? '' : 'disabled';
+            var actionsDefault = `
+                <input type="checkbox" class="checkbox" name="active" ${checked} />
+                <a href="#" class="editRuleButton" >Edit</a>
+                <a href="#" class="removeRuleButton">Remove</a>
+            `;
+            var actionsEditting = `<button class="save">Save</button>`;
+            var actions = rule.isEditing ? actionsEditting : actionsDefault;
+
             var li = 
             `
-                <li class="${rule.active ? 'active' : ''}" data-rule-index="${i}">
-                    <input class="from" title="${rule.from}" ${rule.isEditing ? '' : 'disabled'} value="${rule.from}" />
+                <li class="${active}" data-rule-index="${i}">
+                    <input class="from" title="${rule.from}" ${disabled} value="${rule.from}" />
                     <span class="seperator">&gt;</span>
-                    <input class="to" title="${rule.to}" ${rule.isEditing ? '' : 'disabled'} value="${rule.to}" />
-                    <input type="checkbox" class="checkbox" name="active" ${checked} />
-                    <a href="#" class="editRuleButton" >Edit</a>
-                    <a href="#" class="removeRuleButton">Remove</a>
+                    <input class="to" title="${rule.to}" ${disabled} value="${rule.to}" />
+                    <div class="actions">
+                        ${actions}
+                    </div>
                 </li>
             `;
             
@@ -64,16 +69,10 @@ function refreshRules() {
     }
 }
 
-function stringToHTML (str) {
-	var parser = new DOMParser();
-	var doc = parser.parseFromString(str, 'text/html');
-	return doc.body.firstElementChild;
-};
-
 function bindEventActions() {
     // Edit
     function clickEditAction(e) {
-        var li = e.target.parentElement;
+        var li = e.target.parentElement.parentElement;
         var index = Number(li.getAttribute('data-rule-index'));
         rules[index].isEditing = !rules[index].isEditing;
         updateRules();
@@ -85,9 +84,27 @@ function bindEventActions() {
         btn.addEventListener('click', clickEditAction);
     });
 
+    //Save
+    function clickSaveAction(e) {
+        var li = e.target.parentElement.parentElement;
+        var index = Number(li.getAttribute('data-rule-index'));
+        const inputFrom = li.querySelector('.from').value;
+        const inputTo = li.querySelector('.to').value;
+        rules[index].from = inputFrom;
+        rules[index].to = inputTo;
+        rules[index].isEditing = false;
+        updateRules();
+    }
+
+    var saveButtons =  rulesUl.querySelectorAll('.save');
+    saveButtons.forEach( (btn) => {
+        btn.removeEventListener('click', clickSaveAction);
+        btn.addEventListener('click', clickSaveAction);
+    });
+
     // Remove
     function clickRemoveAction(e) {
-        var li = e.target.parentElement;
+        var li = e.target.parentElement.parentElement;
         var index = Number(li.getAttribute('data-rule-index'));
         rules.splice(index, 1);
         updateRules();
@@ -100,7 +117,7 @@ function bindEventActions() {
 
     // Active
     function toggleCheckbox(e) {
-        var li = e.target.parentElement;
+        var li = e.target.parentElement.parentElement;
         var index = Number(li.getAttribute('data-rule-index'));
         rules[index].active = e.target.checked;
         updateRules();
@@ -110,4 +127,17 @@ function bindEventActions() {
         btn.removeEventListener('change', toggleCheckbox);
         btn.addEventListener('change', toggleCheckbox);
     });
+}
+
+
+// Utils
+function stringToHTML (str) {
+	var parser = new DOMParser();
+	var doc = parser.parseFromString(str, 'text/html');
+	return doc.body.firstElementChild;
+};
+
+function updateRules() {
+    storage.set('rules', rules);
+    refreshRules();
 }

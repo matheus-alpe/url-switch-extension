@@ -21,6 +21,7 @@ chrome.runtime.onInstalled.addListener(() => {
             active: true,
         },
     ]);
+    // storage.set('rules', []);
 });
 
 /**
