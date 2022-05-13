@@ -10,11 +10,10 @@ const inputTo = document.querySelector('#to');
 
 const submitBtn = document.querySelector('#submit');
 
-
 storage.get('rules').then((response) => {
     rules = response.rules;
     refreshRules();
-})
+});
 
 submitBtn.addEventListener('click', (e) => {
     e.preventDefault();
@@ -22,21 +21,21 @@ submitBtn.addEventListener('click', (e) => {
     let to = inputTo.value;
 
     let newRule = {
-        "from": from,
-        "to": to,
+        from: from,
+        to: to,
         active: true,
-        isEditing: false
-    }
+        isEditing: false,
+    };
 
     rules.push(newRule);
     updateRules();
     refreshRules();
-})
+});
 
 function refreshRules() {
     rulesUl.innerHTML = '';
 
-    if(rules.length) {
+    if (rules.length) {
         for (var i = 0; i < rules.length; i++) {
             var rule = rules[i];
             var active = rule.active ? 'active' : '';
@@ -61,12 +60,18 @@ function refreshRules() {
                     </div>
                 </li>
             `;
-            
+
             rulesUl.appendChild(stringToHTML(li));
         }
 
         bindEventActions();
     }
+}
+
+function stringToHTML(str) {
+    var parser = new DOMParser();
+    var doc = parser.parseFromString(str, 'text/html');
+    return doc.body.firstElementChild;
 }
 
 function bindEventActions() {
@@ -78,8 +83,8 @@ function bindEventActions() {
         updateRules();
     }
 
-    var editButtons =  rulesUl.querySelectorAll('.editRuleButton');
-    editButtons.forEach( (btn) => {
+    var editButtons = rulesUl.querySelectorAll('.editRuleButton');
+    editButtons.forEach((btn) => {
         btn.removeEventListener('click', clickEditAction);
         btn.addEventListener('click', clickEditAction);
     });
@@ -109,8 +114,8 @@ function bindEventActions() {
         rules.splice(index, 1);
         updateRules();
     }
-    var removeButtons =  rulesUl.querySelectorAll('.removeRuleButton');
-    removeButtons.forEach( (btn) => {
+    var removeButtons = rulesUl.querySelectorAll('.removeRuleButton');
+    removeButtons.forEach((btn) => {
         btn.removeEventListener('click', clickRemoveAction);
         btn.addEventListener('click', clickRemoveAction);
     });
@@ -122,13 +127,12 @@ function bindEventActions() {
         rules[index].active = e.target.checked;
         updateRules();
     }
-    var checkboxButtons =  rulesUl.querySelectorAll('.checkbox');
-    checkboxButtons.forEach( (btn) => {
+    var checkboxButtons = rulesUl.querySelectorAll('.checkbox');
+    checkboxButtons.forEach((btn) => {
         btn.removeEventListener('change', toggleCheckbox);
         btn.addEventListener('change', toggleCheckbox);
     });
 }
-
 
 // Utils
 function stringToHTML (str) {

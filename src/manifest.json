@@ -12,11 +12,11 @@
         "tabs"
     ],
     "background": {
-        "scripts": ["/dist/background.js"]
+        "scripts": ["background.js"]
     },
     "browser_action": {
-        "default_icon": "/src/assets/icons/switch.png",
-        "default_popup": "/src/pages/popup.html",
+        "default_icon": "switch.png",
+        "default_popup": "popup.html",
         "default_title": "Add redirect rules."
     }
 }
