@@ -68,12 +68,6 @@ function refreshRules() {
     }
 }
 
-function stringToHTML(str) {
-    var parser = new DOMParser();
-    var doc = parser.parseFromString(str, 'text/html');
-    return doc.body.firstElementChild;
-}
-
 function bindEventActions() {
     // Edit
     function clickEditAction(e) {
@@ -136,9 +130,9 @@ function bindEventActions() {
 
 // Utils
 function stringToHTML (str) {
-	var parser = new DOMParser();
-	var doc = parser.parseFromString(str, 'text/html');
-	return doc.body.firstElementChild;
+    var parser = new DOMParser();
+    var doc = parser.parseFromString(str, 'text/html');
+    return doc.body.firstElementChild;
 };
 
 function updateRules() {

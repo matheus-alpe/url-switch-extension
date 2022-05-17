@@ -1,6 +1,5 @@
 const path = require('path');
 const autoprefixer = require('autoprefixer');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
@@ -9,7 +8,6 @@ module.exports = {
         background: [path.resolve(__dirname, 'src', 'js', 'background.js')],
         popup: [path.resolve(__dirname, 'src', 'js', 'popup.js')],
         app: [path.resolve(__dirname, 'src', 'app.js')],
-        app: ['./src/app.js'],
     },
     output: {
         clean: true,
