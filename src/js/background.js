@@ -1,4 +1,4 @@
-import { storage } from './utils';
+import { storage } from '@utils';
 
 /**
  * @typedef {Object} Rule
