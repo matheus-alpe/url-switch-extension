@@ -7,36 +7,26 @@ import { storage } from './utils';
  * @property {boolean} active - Determines whether the rule is active
  */
 
-chrome.runtime.onInstalled.addListener(() => {
-    console.log('onInstalled');
-    storage.set('rules', [
-        {
-            from: '//www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
-            to: '//i.pinimg.com/originals/78/cf/3e/78cf3eee0658dbf205e821f5a31db5e3.png',
-            active: true,
-        },
-        {
-            from: '//www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png',
-            to: '//i.pinimg.com/originals/78/cf/3e/78cf3eee0658dbf205e821f5a31db5e3.png',
-            active: true,
-        },
-    ]);
-    // storage.set('rules', []);
-});
-
 /**
  * @type {Rule[]}
  */
-let localRules = [];
+let localRules = [
+    {
+        from: '//www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
+        to: '//i.pinimg.com/originals/78/cf/3e/78cf3eee0658dbf205e821f5a31db5e3.png',
+        active: true,
+    },
+    {
+        from: '//www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png',
+        to: '//i.pinimg.com/originals/78/cf/3e/78cf3eee0658dbf205e821f5a31db5e3.png',
+        active: true,
+    },
+];
 
-/**
- *
- * @param {Rule[]} rules
- */
-function updateLocalRule({ rules }) {
-    localRules = rules;
-    console.log('## updateLocalRule:', localRules);
-}
+chrome.runtime.onInstalled.addListener(() => {
+    storage.set('rules', localRules);
+    changeExtensionIcon();
+});
 
 chrome.tabs.onActivated.addListener(() => {
     storage.get('rules').then(updateLocalRule);
@@ -46,6 +36,32 @@ chrome.storage.onChanged.addListener(() => {
     storage.get('rules').then(updateLocalRule);
 });
 
+/**
+ * @param {Rule[]} rules
+ */
+function updateLocalRule({ rules }) {
+    localRules = rules;
+    changeExtensionIcon();
+}
+
+/**
+ * Verifies if has an active rule and change icon state.
+ */
+function changeExtensionIcon() {
+    const hasActiveRule = Boolean(localRules.find((rule) => rule.active));
+
+    const iconConfig = {
+        path: hasActiveRule ? 'icon-16x16.png' : 'icon-16x16-deactivated.png',
+    };
+
+    chrome.browserAction.setIcon(iconConfig);
+}
+
+/**
+ * Handler to redirect request when match rule.
+ * @param {Object} details
+ * @returns {Object}
+ */
 function requestHandler(details) {
     // test on https://www.google.com.br/
     const matchedRule = localRules.find((rule) =>
