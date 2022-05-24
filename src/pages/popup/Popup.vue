@@ -3,7 +3,7 @@
         <h1>Redirect switch</h1>
         <div>
             Redirect Rule
-            <ul>
+            <ul class="list-rules">
                 <RuleItem
                     v-for="(rule, index) in rules"
                     :rule="rule"
