@@ -1,6 +1,10 @@
-import { createApp } from 'vue';
+import Vue from 'vue';
+import vuetify from '@plugins/vuetify';
 import Popup from '@pages/popup/Popup.vue';
 
 import './styles/app.scss';
 
-createApp(Popup).mount('#app');
+new Vue({
+    vuetify,
+    render: (h) => h(Popup),
+}).$mount('#app');

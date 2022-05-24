@@ -1,19 +1,7 @@
-<script setup>
-import RuleItem from '@components/RuleItem.vue';
-
-import { ref } from 'vue';
-import { storage } from '@utils';
-const rules = ref([]);
-
-storage.get('rules').then((response) => {
-    rules.value = response.rules;
-});
-</script>
-
 <template>
-    <main class="mdc-card rs-card">
-        <h1 class="rs-title">Redirect switch</h1>
-        <div id="rules">
+    <v-app class="popup">
+        <h1>Redirect switch</h1>
+        <div>
             Redirect Rule
             <ul>
                 <RuleItem
@@ -36,5 +24,32 @@ storage.get('rules').then((response) => {
             </label>
             <button type="submit" id="submit">Add</button>
         </div>
-    </main>
+    </v-app>
 </template>
+
+<script>
+import RuleItem from '@components/RuleItem.vue';
+
+import { storage } from '@utils';
+
+export default {
+    name: 'Popup',
+
+    components: {
+        RuleItem,
+    },
+
+    data() {
+        return {
+            rules: [true],
+        };
+    },
+
+    created() {
+        storage.get('rules').then((response) => {
+            this.rules = response.rules;
+            console.log(this.rules);
+        });
+    },
+};
+</script>

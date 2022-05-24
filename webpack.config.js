@@ -1,8 +1,9 @@
 const path = require('path');
-const webpack = require('webpack');
-const autoprefixer = require('autoprefixer');
+// const webpack = require('webpack');
+// const autoprefixer = require('autoprefixer');
 const CopyPlugin = require('copy-webpack-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
+const { VuetifyLoaderPlugin } = require('vuetify-loader');
 
 module.exports = {
     mode: 'development',
@@ -25,6 +26,7 @@ module.exports = {
         alias: {
             '@components': path.resolve(__dirname, 'src', 'components'),
             '@pages': path.resolve(__dirname, 'src', 'pages'),
+            '@plugins': path.resolve(__dirname, 'src', 'plugins'),
             '@utils': path.resolve(__dirname, 'src', 'utils'),
         },
     },
@@ -38,35 +40,14 @@ module.exports = {
                 },
             },
             {
-                test: /\.scss$/,
+                test: /\.s(c|a)ss$/,
                 use: [
-                    {
-                        loader: 'file-loader',
-                        options: {
-                            name: 'popup.css',
-                        },
-                    },
-                    { loader: 'extract-loader' },
-                    { loader: 'css-loader' },
-                    {
-                        loader: 'postcss-loader',
-                        options: {
-                            postcssOptions: {
-                                plugins: [autoprefixer()],
-                            },
-                        },
-                    },
+                    'vue-style-loader',
+                    'css-loader',
                     {
                         loader: 'sass-loader',
                         options: {
-                            // Prefer Dart Sass
                             implementation: require('sass'),
-
-                            // See https://github.com/webpack-contrib/sass-loader/issues/804
-                            webpackImporter: false,
-                            sassOptions: {
-                                includePaths: ['./node_modules'],
-                            },
                         },
                     },
                 ],
@@ -98,9 +79,10 @@ module.exports = {
             ],
         }),
         new VueLoaderPlugin(),
-        new webpack.DefinePlugin({
-            __VUE_OPTIONS_API__: false,
-            __VUE_PROD_DEVTOOLS__: false,
-        }),
+        new VuetifyLoaderPlugin(),
+        // new webpack.DefinePlugin({
+        //     __VUE_OPTIONS_API__: false,
+        //     __VUE_PROD_DEVTOOLS__: false,
+        // }),
     ],
 };

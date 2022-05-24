@@ -4,4 +4,4 @@ Project created by [Matheus Alves](https://github.com/matheus-alpe) (Dev), [Rafa
 
 ![Extension](/readme-assets/Example.png)
 
-Working with [Manifest V2](https://developer.chrome.com/docs/extensions/mv2/manifest/) and [Material 2](https://material.io/)
+Working with [Manifest V2](https://developer.chrome.com/docs/extensions/mv2/manifest/) and [Material 2](https://material.io/) ([Vuetify](https://vuetifyjs.com/))

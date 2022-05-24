@@ -1,13 +1,3 @@
-<script setup>
-import { ref } from 'vue';
-
-const props = defineProps({
-    rule: Object,
-});
-
-const isDisabled = ref(true);
-</script>
-
 <template>
     <li :class="{ active: rule.active }">
         <input
@@ -28,14 +18,12 @@ const isDisabled = ref(true);
 
         <div class="actions">
             <template v-if="isDisabled">
-                <input
-                    type="checkbox"
-                    class="checkbox"
-                    name="active"
-                    :checked="rule.active"
-                />
+                <v-container class="px-0" fluid>
+                    <v-switch x-small v-model="rule.active"></v-switch>
+                </v-container>
                 <button @click="isDisabled = false">Edit</button>
                 <button class="removeRuleButton">Remove</button>
+                <v-btn elevation="2" x-small>Click</v-btn>
             </template>
             <template v-else>
                 <button @click="isDisabled = true">Save</button>
@@ -43,3 +31,19 @@ const isDisabled = ref(true);
         </div>
     </li>
 </template>
+
+<script>
+export default {
+    name: 'RuleItem',
+
+    props: {
+        rule: Object,
+    },
+
+    data() {
+        return {
+            isDisabled: true,
+        };
+    },
+};
+</script>
