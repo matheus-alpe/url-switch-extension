@@ -1,4 +1,42 @@
-.list-rules {
+@use 'variables';
+
+body {
+    background: #ffffff;
+
+    box-shadow: 0px 16px 24px rgba(0, 0, 0, 0.14),
+        0px 6px 30px rgba(0, 0, 0, 0.12), 0px 8px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+
+.popup {
+    width: 800px;
+
+    .list-rules {
+        padding: 0;
+    }
+}
+
+.input-field {
+    max-width: 326px;
+}
+
+.rule-item {
     display: flex;
-    background: red;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 17px;
+
+    .actions {
+        display: flex;
+        align-items: center;
+    }
+}
+
+.rule-form {
+    .form-inputs {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 17px;
+    }
 }

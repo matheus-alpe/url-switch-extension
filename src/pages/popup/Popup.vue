@@ -1,29 +1,40 @@
 <template>
-    <v-app class="popup">
-        <h1>Redirect switch</h1>
-        <div>
-            Redirect Rule
-            <ul class="list-rules">
-                <RuleItem
-                    v-for="(rule, index) in rules"
-                    :rule="rule"
-                    :key="index"
-                    :data-rule-index="index"
-                />
-            </ul>
-        </div>
+    <v-app class="popup" :class="{ 'has-rule': rules.length }">
+        <v-container fluid>
+            <header>
+                <img src="icon-16x16.png" alt="logo" />
+                <h1>Redirect switch</h1>
+            </header>
 
-        <div id="add-rule">
-            <label for="from">
-                From:
-                <input type="text" id="from" />
-            </label>
-            <label for="to">
-                To:
-                <input type="text" id="to" />
-            </label>
-            <button type="submit" id="submit">Add</button>
-        </div>
+            <div>
+                <ul class="list-rules">
+                    <RuleItem
+                        v-for="(rule, index) in rules"
+                        :rule="rule"
+                        :key="index"
+                    />
+                </ul>
+            </div>
+
+            <v-form class="rule-form">
+                <div class="form-inputs">
+                    <v-text-field
+                        class="input-field from"
+                        label="original url"
+                        outlined
+                    ></v-text-field>
+                    <v-text-field
+                        class="input-field to"
+                        label="redirect to"
+                        outlined
+                    ></v-text-field>
+                </div>
+                <v-btn>
+                    <v-icon>mdi-plus</v-icon>
+                    Create new</v-btn
+                >
+            </v-form>
+        </v-container>
     </v-app>
 </template>
 

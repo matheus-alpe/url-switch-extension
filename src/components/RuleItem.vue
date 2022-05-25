@@ -1,32 +1,44 @@
 <template>
-    <li :class="{ active: rule.active }">
-        <input
-            class="from"
-            :title="rule.from"
+    <li class="rule-item" :class="{ active: rule.active }">
+        <v-text-field
+            :disabled="isDisabled"
+            class="input-field from"
             v-model="rule.from"
+            label="original url"
+            outlined
+        ></v-text-field>
+        <v-text-field
             :disabled="isDisabled"
-        />
-
-        <span class="seperator">&gt;</span>
-
-        <input
-            class="to"
-            :title="rule.to"
+            class="input-field to"
             v-model="rule.to"
-            :disabled="isDisabled"
-        />
+            label="redirect to"
+            outlined
+        ></v-text-field>
 
         <div class="actions">
             <template v-if="isDisabled">
-                <v-container class="px-0" fluid>
-                    <v-switch x-small v-model="rule.active"></v-switch>
-                </v-container>
-                <button @click="isDisabled = false">Edit</button>
-                <button class="removeRuleButton">Remove</button>
-                <v-btn elevation="2" x-small>Click</v-btn>
+                <v-switch x-small v-model="rule.active"></v-switch>
+
+                <v-menu offset-y>
+                    <template v-slot:activator="{ on, attrs }">
+                        <v-icon v-bind="attrs" v-on="on" color="#000">
+                            mdi-dots-vertical
+                        </v-icon>
+                    </template>
+                    <v-list>
+                        <v-list-item>
+                            <v-list-item-title @click="isDisabled = false"
+                                >Edit</v-list-item-title
+                            >
+                        </v-list-item>
+                        <v-list-item>
+                            <v-list-item-title>Remove</v-list-item-title>
+                        </v-list-item>
+                    </v-list>
+                </v-menu>
             </template>
             <template v-else>
-                <button @click="isDisabled = true">Save</button>
+                <v-btn @click="isDisabled = true">Save</v-btn>
             </template>
         </div>
     </li>
@@ -36,9 +48,7 @@
 export default {
     name: 'RuleItem',
 
-    props: {
-        rule: Object,
-    },
+    props: ['rule'],
 
     data() {
         return {

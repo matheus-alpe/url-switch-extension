@@ -40,6 +40,12 @@ module.exports = {
                 },
             },
             {
+                test: /\.css$/,
+                use: {
+                    loader: 'css-loader',
+                },
+            },
+            {
                 test: /\.s(c|a)ss$/,
                 use: [
                     'vue-style-loader',
