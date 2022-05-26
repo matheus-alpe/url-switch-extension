@@ -17,7 +17,7 @@
 
         <div class="actions">
             <template v-if="isDisabled">
-                <v-switch x-small v-model="rule.active"></v-switch>
+                <v-switch x-small color="#149E8E"  v-model="rule.active"></v-switch>
 
                 <v-menu offset-y>
                     <template v-slot:activator="{ on, attrs }">

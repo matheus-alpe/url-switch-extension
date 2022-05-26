@@ -27,9 +27,10 @@
                         class="input-field to"
                         label="redirect to"
                         outlined
+
                     ></v-text-field>
                 </div>
-                <v-btn>
+                <v-btn color="#149E8E">
                     <v-icon>mdi-plus</v-icon>
                     Create new</v-btn
                 >
@@ -52,7 +53,7 @@ export default {
 
     data() {
         return {
-            rules: [true],
+            rules: [],
         };
     },
 
