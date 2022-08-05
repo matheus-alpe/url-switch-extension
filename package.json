@@ -1,7 +1,6 @@
 {
-  "name": "switch-extension",
+  "name": "chrome-extension-redirect-switch",
   "version": "0.1.0",
-  "private": true,
   "description": "Simple redirect extension - Working with [Manifest V2](https://developer.chrome.com/docs/extensions/mv2/manifest/)",
   "scripts": {
     "serve:front": "vue-cli-service serve",
