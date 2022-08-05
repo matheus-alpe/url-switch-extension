@@ -1,0 +1,28 @@
+{
+    "name": "Switch",
+    "description": "A simple redirect extension.",
+    "manifest_version": 2,
+    "version": "1.0.0",
+    "author": "Matheus Alves Pereira - https://github.com/matheus-alpe",
+    "permissions": [
+        "webRequest",
+        "webRequestBlocking",
+        "<all_urls>",
+        "storage",
+        "tabs"
+    ],
+    "background": {
+        "scripts": [
+            "background.js"
+        ]
+    },
+    "icons": {
+        "16": "assets/icon-16x16-deactivated.png",
+        "48": "assets/icon-48x48.png",
+        "128": "assets/icon-128x128.png"
+    },
+    "browser_action": {
+        "default_popup": "index.html",
+        "default_title": "Add redirect rules."
+    }
+}
