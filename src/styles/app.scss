@@ -1,10 +1,11 @@
 @use 'variables';
 
 body {
-    background: #ffffff;
-
-    box-shadow: 0px 16px 24px rgba(0, 0, 0, 0.14),
-        0px 6px 30px rgba(0, 0, 0, 0.12), 0px 8px 10px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(#000, #fff);
+    box-shadow: 
+        0px 16px 24px rgba(0, 0, 0, 0.14),
+        0px 6px 30px rgba(0, 0, 0, 0.12),
+        0px 8px 10px rgba(0, 0, 0, 0.2);
     border-radius: 4px;
     position: relative;
 }
@@ -15,6 +16,13 @@ body {
     .list-rules {
         padding: 0;
     }
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5px;
 }
 
 .input-field {

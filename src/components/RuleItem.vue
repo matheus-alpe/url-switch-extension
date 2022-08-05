@@ -1,27 +1,28 @@
+<!-- eslint-disable vue/no-mutating-props -->
 <template>
     <li class="rule-item" :class="{ active: rule.active }">
         <v-text-field
             :disabled="isDisabled"
             class="input-field from"
-            :value="rule.from"
+            v-model="rule.from"
             label="original url"
             outlined
         ></v-text-field>
         <v-text-field
             :disabled="isDisabled"
             class="input-field to"
-            :value="rule.to"
+            v-model="rule.to"
             label="redirect to"
             outlined
         ></v-text-field>
 
         <div class="actions">
             <template v-if="isDisabled">
-                <v-switch x-small color="#149E8E"  :value="rule.active"></v-switch>
+                <v-switch x-small color="#149E8E"  v-model="rule.active"></v-switch>
 
                 <v-menu offset-y>
                     <template v-slot:activator="{ on, attrs }">
-                        <v-icon v-bind="attrs" v-on="on" color="#000">
+                        <v-icon v-bind="attrs" v-on="on">
                             mdi-dots-vertical
                         </v-icon>
                     </template>
@@ -38,7 +39,7 @@
                 </v-menu>
             </template>
             <template v-else>
-                <v-btn @click="isDisabled = true">Save</v-btn>
+                <v-btn @click="isDisabled = true" color="#149E8E" plain>Save</v-btn>
             </template>
         </div>
     </li>
