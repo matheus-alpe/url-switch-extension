@@ -4,9 +4,9 @@
   "private": true,
   "description": "Simple redirect extension - Working with [Manifest V2](https://developer.chrome.com/docs/extensions/mv2/manifest/)",
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build && yarn webpack:extension",
-    "webpack:extension": "webpack --config extension-webpack.config.js",
+    "serve:front": "vue-cli-service serve",
+    "serve:back": "webpack --config extension/webpack.config.js -w",
+    "build": "vue-cli-service build && webpack --config extension/webpack.config.js",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {

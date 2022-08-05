@@ -1,8 +1,5 @@
-import manifest from './manifest.json';
-
-console.log(manifest)
-
-let chrome
+/* eslint-disable no-undef */
+import { storage } from '../src/utils';
 
 /**
  * @typedef {Object} Rule
@@ -28,39 +25,38 @@ let localRules = [
 ];
 
 chrome.runtime.onInstalled.addListener(() => {
-    // storage.set('rules', localRules);
-    console.log('it works')
-    // changeExtensionIcon();
+    storage.set('rules', localRules);
+    changeExtensionIcon();
 });
 
 chrome.tabs.onActivated.addListener(() => {
-    // storage.get('rules').then(updateLocalRule);
+    storage.get('rules').then(updateLocalRule);
 });
 
 chrome.storage.onChanged.addListener(() => {
-    // storage.get('rules').then(updateLocalRule);
+    storage.get('rules').then(updateLocalRule);
 });
 
 /**
  * @param {Rule[]} rules
  */
-// function updateLocalRule({ rules }) {
-//     localRules = rules;
-//     // changeExtensionIcon();
-// }
+function updateLocalRule({ rules }) {
+    localRules = rules;
+    changeExtensionIcon();
+}
 
 /**
  * Verifies if has an active rule and change icon state.
  */
-// function changeExtensionIcon() {
-//     const hasActiveRule = Boolean(localRules.find((rule) => rule.active));
+function changeExtensionIcon() {
+    const hasActiveRule = Boolean(localRules.find((rule) => rule.active));
 
-//     const iconConfig = {
-//         path: hasActiveRule ? 'icon-16x16.png' : 'icon-16x16-deactivated.png',
-//     };
+    const iconConfig = {
+        path: `assets/${hasActiveRule ? 'icon-16x16.png' : 'icon-16x16-deactivated.png'}`,
+    };
 
-//     chrome.browserAction.setIcon(iconConfig);
-// }
+    chrome.browserAction.setIcon(iconConfig);
+}
 
 /**
  * Handler to redirect request when match rule.
@@ -90,7 +86,7 @@ const RequestConfig = {
 };
 
 chrome.webRequest.onBeforeRequest.addListener(
-  requestHandler,
-  RequestConfig.filter,
-  RequestConfig.opt_extraInfoSpec
+    requestHandler,
+    RequestConfig.filter,
+    RequestConfig.opt_extraInfoSpec
 );

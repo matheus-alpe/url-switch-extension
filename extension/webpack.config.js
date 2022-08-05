@@ -4,12 +4,12 @@ const CopyPlugin = require('copy-webpack-plugin');
 module.exports = {
   mode: 'development',
   entry: {
-    background: [path.resolve(__dirname, 'extension', 'background.js')],
+    background: [path.resolve(__dirname, 'background.js')],
   },
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, 'dist'),
-    publicPath: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, '..', 'dist'),
+    publicPath: path.resolve(__dirname, '..', 'dist'),
   },
   devtool: 'source-map',
   optimization: {
@@ -31,12 +31,12 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         {
-          from: path.resolve(__dirname, 'extension', 'manifest.json'),
-          to: path.resolve(__dirname, 'dist', '[name][ext]'),
+          from: path.resolve(__dirname, 'manifest.json'),
+          to: path.resolve(__dirname,  '..', 'dist', '[name][ext]'),
         },
         {
-          from: path.resolve(__dirname, 'src', 'assets', '**/*'),
-          to: path.resolve(__dirname, 'dist', 'assets', '[name][ext]'),
+          from: path.resolve(__dirname, '..', 'src', 'assets', '**/*'),
+          to: path.resolve(__dirname,  '..', 'dist', 'assets', '[name][ext]'),
         }
       ],
     }),
