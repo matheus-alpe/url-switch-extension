@@ -17,13 +17,13 @@ let localRules = [
     id: 1,
     from: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
     to: 'https://i.pinimg.com/originals/78/cf/3e/78cf3eee0658dbf205e821f5a31db5e3.png',
-    active: true,
+    active: false,
   },
   {
     id: 2,
     from: 'https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png',
     to: 'https://i.pinimg.com/originals/78/cf/3e/78cf3eee0658dbf205e821f5a31db5e3.png',
-    active: false,
+    active: true,
   },
 ];
 
