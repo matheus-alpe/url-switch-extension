@@ -30,9 +30,10 @@ let localRules = [
 chrome.runtime.onInstalled.addListener(async () => {
   await storage.set('rules', localRules);
   await saveRules(localRules);
+  changeExtensionIcon();
+  //TODO: remove later, development purpose
   const response = await getDynamicRules();
   console.log(response);
-  changeExtensionIcon();
 });
 
 chrome.tabs.onActivated.addListener(() => {
