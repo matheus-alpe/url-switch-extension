@@ -9,11 +9,19 @@
  */
 
 /**
+ * @typedef {Object} DynamicRule
+ * @property {number} id
+ * @property {number} priority
+ * @property {object} action
+ * @property {object} condition
+ */
+
+/**
  *
  * @param {LocalRule} rule
- * @returns
+ * @returns {DynamicRule}
  */
-function createRule(rule) {
+function createDynamicRule(rule) {
   return {
     id: rule.id,
     priority: 1,
@@ -46,7 +54,11 @@ function createRule(rule) {
   };
 }
 
-export function getRules() {
+/**
+ *
+ * @returns {Promise<DynamicRule[]>}
+ */
+export function getDynamicRules() {
   return new Promise((resolve, reject) => {
     try {
       chrome.declarativeNetRequest.getDynamicRules(resolve);
@@ -56,35 +68,35 @@ export function getRules() {
   });
 }
 
-export function saveRule(rule) {
-  return new Promise((resolve, reject) => {
-    try {
-      const dynamicRule = createRule(rule);
-      chrome.declarativeNetRequest.updateDynamicRules(
-        {
-          addRules: [dynamicRule],
-        },
-        () => resolve(true, rule)
-      );
-    } catch (error) {
-      reject(error);
-    }
-  });
+/**
+ *
+ * @param {LocalRule[]} unfilteredRules
+ * @param {string} key
+ * @param {any} value
+ * @returns {LocalRule[]}
+ */
+function getFilteredRules(unfilteredRules, key, value) {
+  return unfilteredRules.filter((rule) => rule[key] === value);
 }
 
 /**
  *
- * @param {Number[]} rulesId
- * @returns
+ * @param {LocalRule[]} rules
+ * @returns {Promise<LocalRule[]>}
  */
-export function removeRule(rulesId = []) {
+export function saveRules(rules) {
   return new Promise((resolve, reject) => {
     try {
-      chrome.declarativeNetRequest.updateDynamicRules(
-        {
-          removeRuleIds: rulesId,
-        },
-        () => resolve(true)
+      const activeRules = getFilteredRules(rules, 'active', true);
+      const inactiveRules = getFilteredRules(rules, 'active', false);
+
+      const updateRuleOptions = {
+        addRules: activeRules.map(createDynamicRule),
+        removeRuleIds: inactiveRules.map((rule) => rule.id),
+      };
+
+      chrome.declarativeNetRequest.updateDynamicRules(updateRuleOptions, () =>
+        resolve(true, rules)
       );
     } catch (error) {
       reject(error);

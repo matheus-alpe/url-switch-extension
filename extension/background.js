@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import { storage } from '../src/utils';
-import { getRules } from './chrome-utils/requestHandler';
+import { getDynamicRules, saveRules } from './chrome-utils/requestHandler';
 
 /**
  * @typedef {Object} Rule
@@ -23,13 +23,15 @@ let localRules = [
     id: 2,
     from: 'https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png',
     to: 'https://i.pinimg.com/originals/78/cf/3e/78cf3eee0658dbf205e821f5a31db5e3.png',
-    active: true,
+    active: false,
   },
 ];
 
-chrome.runtime.onInstalled.addListener(() => {
-  storage.set('rules', localRules);
-  getRules().then(console.log);
+chrome.runtime.onInstalled.addListener(async () => {
+  await storage.set('rules', localRules);
+  await saveRules(localRules);
+  const response = await getDynamicRules();
+  console.log(response);
   changeExtensionIcon();
 });
 
