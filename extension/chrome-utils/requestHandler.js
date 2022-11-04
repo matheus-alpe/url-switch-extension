@@ -81,25 +81,36 @@ function getFilteredRules(unfilteredRules, key, value) {
 
 /**
  *
+ * @param {LocalRule[]} activeRules
+ */
+async function getActiveRulesNotInserted(activeRules) {
+  const dynamicRules = await getDynamicRules();
+
+  return activeRules.filter((activeRule) => {
+    return !dynamicRules.find(
+      (dynamicRule) => dynamicRule.id === activeRule.id
+    );
+  });
+}
+
+/**
+ *
  * @param {LocalRule[]} rules
  * @returns {Promise<LocalRule[]>}
  */
-export function saveRules(rules) {
-  return new Promise((resolve, reject) => {
-    try {
-      const activeRules = getFilteredRules(rules, 'active', true);
-      const inactiveRules = getFilteredRules(rules, 'active', false);
+export async function saveRules(rules) {
+  try {
+    const activeRules = getFilteredRules(rules, 'active', true);
+    const rulesNotInserted = await getActiveRulesNotInserted(activeRules);
+    const inactiveRules = getFilteredRules(rules, 'active', false);
 
-      const updateRuleOptions = {
-        addRules: activeRules.map(createDynamicRule),
-        removeRuleIds: inactiveRules.map((rule) => rule.id),
-      };
+    const updateRuleOptions = {
+      addRules: rulesNotInserted.map(createDynamicRule),
+      removeRuleIds: inactiveRules.map((rule) => rule.id),
+    };
 
-      chrome.declarativeNetRequest.updateDynamicRules(updateRuleOptions, () =>
-        resolve(true, rules)
-      );
-    } catch (error) {
-      reject(error);
-    }
-  });
+    return chrome.declarativeNetRequest.updateDynamicRules(updateRuleOptions);
+  } catch (error) {
+    console.log(error);
+  }
 }
