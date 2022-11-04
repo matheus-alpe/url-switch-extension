@@ -47,8 +47,9 @@ chrome.storage.onChanged.addListener(() => {
  * @param {Rule[]} rules
  */
 function updateLocalRule({ rules }) {
-  localRules = rules;
-  changeExtensionIcon();
+  saveRules(rules)
+    .then(() => (localRules = rules))
+    .then(changeExtensionIcon);
 }
 
 /**
