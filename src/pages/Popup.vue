@@ -1,16 +1,24 @@
 <template>
-  <v-app class="popup" :class="{ 'has-rule': rules.length }">
+  <v-app
+    class="popup"
+    :class="{ 'has-rule': rules.length }"
+  >
     <v-container fluid>
       <header class="header">
-        <img src="@/assets/icons/icon-16x16.png" alt="logo" />
+        <img
+          src="@/assets/icons/icon-16x16.png"
+          alt="logo"
+        />
         <h1>Redirect switch</h1>
       </header>
 
-      <div>
-        <ul class="list-rules">
-          <RuleItem v-for="(rule, index) in rules" :rule="rule" :key="index" />
-        </ul>
-      </div>
+      <rule-list>
+        <rule-item
+          v-for="(rule, index) in rules"
+          :rule="rule"
+          :key="index"
+        />
+      </rule-list>
 
       <form class="rule-form">
         <div class="form-inputs">
@@ -27,7 +35,10 @@
           ></v-text-field>
         </div>
 
-        <v-btn color="#149E8E" dark>
+        <v-btn
+          color="#149E8E"
+          dark
+        >
           <v-icon>mdi-plus</v-icon>
           Create new
         </v-btn>
@@ -37,14 +48,16 @@
 </template>
 
 <script>
-import RuleItem from "@/components/RuleItem.vue";
+import RuleList from '@/components/RuleList.vue';
+import RuleItem from '@/components/RuleItem.vue';
 
 // import { storage } from '@utils';
 
 export default {
-  name: "PagePopup",
+  name: 'PagePopup',
 
   components: {
+    RuleList,
     RuleItem,
   },
 
@@ -52,13 +65,21 @@ export default {
     return {
       rules: [
         {
-          from: "//www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png",
-          to: "//i.pinimg.com/originals/78/cf/3e/78cf3eee0658dbf205e821f5a31db5e3.png",
+          id: 1,
+          from: '//www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
+          to: '//i.pinimg.com/originals/78/cf/3e/78cf3eee0658dbf205e821f5a31db5e3.png',
           active: true,
         },
         {
-          from: "//www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png",
-          to: "//i.pinimg.com/originals/78/cf/3e/78cf3eee0658dbf205e821f5a31db5e3.png",
+          id: 2,
+          from: '//www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
+          to: '//i.pinimg.com/originals/78/cf/3e/78cf3eee0658dbf205e821f5a31db5e3.png',
+          active: true,
+        },
+        {
+          id: 3,
+          from: '//www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
+          to: '//i.pinimg.com/originals/78/cf/3e/78cf3eee0658dbf205e821f5a31db5e3.png',
           active: true,
         },
       ],
