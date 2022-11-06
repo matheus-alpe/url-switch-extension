@@ -20,34 +20,13 @@
         />
       </rule-list>
 
-      <form class="rule-form">
-        <div class="form-inputs">
-          <v-text-field
-            class="input-field from"
-            label="original url"
-            outlined
-          ></v-text-field>
-
-          <v-text-field
-            class="input-field to"
-            label="redirect to"
-            outlined
-          ></v-text-field>
-        </div>
-
-        <v-btn
-          color="#149E8E"
-          dark
-        >
-          <v-icon>mdi-plus</v-icon>
-          Create new
-        </v-btn>
-      </form>
+      <rule-create />
     </v-container>
   </v-app>
 </template>
 
 <script>
+import RuleCreate from '@/components/RuleCreate.vue';
 import RuleList from '@/components/RuleList.vue';
 import RuleItem from '@/components/RuleItem.vue';
 
@@ -57,6 +36,7 @@ export default {
   name: 'PagePopup',
 
   components: {
+    RuleCreate,
     RuleList,
     RuleItem,
   },

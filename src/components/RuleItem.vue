@@ -82,6 +82,11 @@ export default {
   },
 
   props: {
+    disabled: {
+      type: Boolean,
+      default: true,
+    },
+
     rule: {
       type: Object,
       default: () => ({
@@ -95,7 +100,7 @@ export default {
 
   data() {
     return {
-      isDisabled: true,
+      isDisabled: this.disabled,
     };
   },
 
