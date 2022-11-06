@@ -28,6 +28,7 @@
         v-if="!showForm"
         @click="showForm = true"
         color="#149E8E"
+        style="margin-bottom: 15px"
         dark
       >
         <v-icon>mdi-plus</v-icon>

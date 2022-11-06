@@ -17,6 +17,8 @@
           v-for="(rule, index) in rules"
           :rule="rule"
           :key="index"
+          @update="store"
+          @remove="removeRule"
           ref="rule"
         />
       </rule-list>
@@ -27,11 +29,11 @@
 </template>
 
 <script>
+import { storage } from '@/utils';
+
 import RuleCreate from '@/components/RuleCreate.vue';
 import RuleList from '@/components/RuleList.vue';
 import RuleItem from '@/components/RuleItem.vue';
-
-// import { storage } from '@utils';
 
 export default {
   name: 'PagePopup',
@@ -44,30 +46,27 @@ export default {
 
   data() {
     return {
-      rules: [
-        {
-          id: 1,
-          from: '//www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
-          to: '//i.pinimg.com/originals/78/cf/3e/78cf3eee0658dbf205e821f5a31db5e3.png',
-          active: true,
-        },
-        {
-          id: 2,
-          from: '//www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
-          to: '//i.pinimg.com/originals/78/cf/3e/78cf3eee0658dbf205e821f5a31db5e3.png',
-          active: true,
-        },
-      ],
+      rules: [],
     };
   },
 
   methods: {
     pushRule(rule) {
-      console.log('pushRule:', rule);
       this.rules.push({
         ...rule,
-        id: this.rules.length,
+        id: this.rules.length + 1,
       });
+
+      this.store();
+    },
+
+    removeRule(rule) {
+      this.rules = this.rules.filter((itemRule) => itemRule.id !== rule.id);
+      this.store();
+    },
+
+    store() {
+      storage.set('rules', this.rules);
     },
 
     scrollToNewRule() {
@@ -79,10 +78,15 @@ export default {
   },
 
   created() {
-    // storage.get('rules').then((response) => {
-    //     this.rules = response.rules;
-    //     console.log(this.rules);
-    // });
+    storage
+      .get('rules')
+      .then((response) => {
+        this.rules = response.rules;
+        console.log(this.rules);
+      })
+      .catch(() => {
+        this.rules = [];
+      });
   },
 
   updated() {
