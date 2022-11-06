@@ -1,3 +1,5 @@
-import * as storage from './storage';
+export * as storage from './storage';
 
-export { storage };
+export function cloneObject(object) {
+  return Object.assign({}, object);
+}

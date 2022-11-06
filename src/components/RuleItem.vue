@@ -7,6 +7,7 @@
   >
     <text-input
       :form-data="rule"
+      :error="showError && !rule.from"
       key-attr="from"
       :disabled="isDisabled"
       label="original url"
@@ -16,6 +17,7 @@
 
     <text-input
       :form-data="rule"
+      :error="showError && !rule.to"
       key-attr="to"
       :disabled="isDisabled"
       label="redirect to"
@@ -95,6 +97,11 @@ export default {
         to: null,
         active: false,
       }),
+    },
+
+    showError: {
+      type: Boolean,
+      default: true,
     },
   },
 

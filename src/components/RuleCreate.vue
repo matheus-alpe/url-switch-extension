@@ -7,26 +7,45 @@
       v-if="showForm"
       :rule="rule"
       :disabled="false"
+      :showError="false"
+      @update="createRule"
     />
 
     <v-row
+      class="mt-1"
       align="center"
       justify="end"
     >
       <v-btn
-        @click="toggleForm"
+        v-if="!showForm"
+        @click="showForm = true"
         color="#149E8E"
         dark
       >
         <v-icon>mdi-plus</v-icon>
         Create new
       </v-btn>
+      <v-btn
+        v-else
+        @click="showForm = false"
+        plain
+      >
+        Cancel
+      </v-btn>
     </v-row>
   </v-container>
 </template>
 
 <script>
+import { cloneObject } from '@/utils';
+
 import RuleItem from '@/components/RuleItem.vue';
+
+const DEFAULT_RULE = {
+  from: '',
+  to: '',
+  active: true,
+};
 
 export default {
   name: 'RuleCreate',
@@ -39,17 +58,15 @@ export default {
     return {
       showForm: false,
 
-      rule: {
-        from: '',
-        to: '',
-        active: true,
-      },
+      rule: cloneObject(DEFAULT_RULE),
     };
   },
 
   methods: {
-    toggleForm() {
-      this.showForm = !this.showForm;
+    createRule() {
+      this.showForm = false;
+      this.$emit('create', cloneObject(this.rule));
+      this.rule = cloneObject(DEFAULT_RULE);
     },
   },
 };

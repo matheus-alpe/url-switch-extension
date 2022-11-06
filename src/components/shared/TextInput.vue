@@ -7,7 +7,7 @@
     outlined
     dense
     hide-details
-    :error="isEmpty"
+    :error="error"
     :color="color"
   />
 </template>
@@ -27,6 +27,11 @@ export default {
       default: false,
     },
 
+    error: {
+      type: Boolean,
+      default: false,
+    },
+
     formData: {
       type: Object,
       default: () => {},
@@ -40,12 +45,6 @@ export default {
     label: {
       type: String,
       default: '',
-    },
-  },
-
-  computed: {
-    isEmpty() {
-      return !this.formData[this.keyAttr];
     },
   },
 };
