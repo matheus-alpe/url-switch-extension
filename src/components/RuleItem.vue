@@ -47,13 +47,16 @@
 
           <v-list>
             <v-list-item>
-              <v-list-item-title @click="isDisabled = false">
+              <v-list-item-title
+                class="menu-item"
+                @click="isDisabled = false"
+              >
                 Edit
               </v-list-item-title>
             </v-list-item>
 
             <v-list-item>
-              <v-list-item-title>Remove</v-list-item-title>
+              <v-list-item-title class="menu-item">Remove</v-list-item-title>
             </v-list-item>
           </v-list>
         </v-menu>
