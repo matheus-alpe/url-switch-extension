@@ -9,7 +9,15 @@
       :disabled="false"
       :showError="false"
       @update="createRule"
-    />
+    >
+      <v-btn
+        @click="showForm = false"
+        plain
+        x-small
+      >
+        <v-icon title="Cancel">mdi-delete-outline</v-icon>
+      </v-btn>
+    </rule-item>
 
     <v-row
       class="mt-1"
@@ -24,13 +32,6 @@
       >
         <v-icon>mdi-plus</v-icon>
         Create new
-      </v-btn>
-      <v-btn
-        v-else
-        @click="showForm = false"
-        plain
-      >
-        Cancel
       </v-btn>
     </v-row>
   </v-container>
@@ -62,11 +63,17 @@ export default {
     };
   },
 
+  watch: {
+    showForm(shouldShow) {
+      if (shouldShow) return;
+      this.rule = cloneObject(DEFAULT_RULE);
+    },
+  },
+
   methods: {
     createRule() {
       this.showForm = false;
       this.$emit('create', cloneObject(this.rule));
-      this.rule = cloneObject(DEFAULT_RULE);
     },
   },
 };

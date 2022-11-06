@@ -62,16 +62,20 @@
         </v-menu>
       </template>
 
-      <v-btn
-        v-else
-        @click="save"
-        color="#149E8E"
-        :disabled="isInvalid"
-        plain
-        min-height="66px"
-      >
-        Save
-      </v-btn>
+      <template v-else>
+        <slot />
+
+        <v-btn
+          @click="save"
+          color="#149E8E"
+          :disabled="isInvalid"
+          plain
+          x-small
+          min-height="66px"
+        >
+          <v-icon title="Save">mdi-content-save-outline</v-icon>
+        </v-btn>
+      </template>
     </div>
   </v-row>
 </template>
