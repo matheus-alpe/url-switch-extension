@@ -17,10 +17,11 @@
           v-for="(rule, index) in rules"
           :rule="rule"
           :key="index"
+          ref="rule"
         />
       </rule-list>
 
-      <rule-create />
+      <rule-create @create="pushRule" />
     </v-container>
   </v-app>
 </template>
@@ -56,14 +57,25 @@ export default {
           to: '//i.pinimg.com/originals/78/cf/3e/78cf3eee0658dbf205e821f5a31db5e3.png',
           active: true,
         },
-        {
-          id: 3,
-          from: '//www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
-          to: '//i.pinimg.com/originals/78/cf/3e/78cf3eee0658dbf205e821f5a31db5e3.png',
-          active: true,
-        },
       ],
     };
+  },
+
+  methods: {
+    pushRule(rule) {
+      console.log('pushRule:', rule);
+      this.rules.push({
+        ...rule,
+        id: this.rules.length,
+      });
+    },
+
+    scrollToNewRule() {
+      const ruleRefLength = this.$refs.rule && this.$refs.rule.length;
+      const scrollHelper = ruleRefLength && this.$refs.rule[ruleRefLength - 1];
+      if (!scrollHelper) return;
+      scrollHelper.$el.scrollIntoView({ behavior: 'instant', block: 'end' });
+    },
   },
 
   created() {
@@ -71,6 +83,10 @@ export default {
     //     this.rules = response.rules;
     //     console.log(this.rules);
     // });
+  },
+
+  updated() {
+    this.scrollToNewRule();
   },
 };
 </script>
