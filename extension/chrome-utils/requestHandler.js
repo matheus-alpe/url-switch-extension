@@ -78,9 +78,6 @@ export async function saveRules(rules) {
     };
 
     chrome.declarativeNetRequest.updateDynamicRules(updateRuleOptions);
-    // TODO: remove this debug logs and add URL validation to input
-    console.log(updateRuleOptions);
-    chrome.declarativeNetRequest.getDynamicRules(console.log);
   } catch (error) {
     console.log(error);
   }

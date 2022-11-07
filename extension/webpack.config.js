@@ -2,7 +2,7 @@ const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   entry: {
     background: [path.resolve(__dirname, 'background.js')],
   },
@@ -32,12 +32,12 @@ module.exports = {
       patterns: [
         {
           from: path.resolve(__dirname, 'manifest.json'),
-          to: path.resolve(__dirname,  '..', 'dist', '[name][ext]'),
+          to: path.resolve(__dirname, '..', 'dist', '[name][ext]'),
         },
         {
           from: path.resolve(__dirname, '..', 'src', 'assets', '**/*'),
-          to: path.resolve(__dirname,  '..', 'dist', 'assets', '[name][ext]'),
-        }
+          to: path.resolve(__dirname, '..', 'dist', 'assets', '[name][ext]'),
+        },
       ],
     }),
   ],

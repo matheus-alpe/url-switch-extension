@@ -4,12 +4,18 @@
     :class="{ 'has-rule': rules.length }"
   >
     <v-container fluid>
-      <header class="header">
-        <img
-          src="@/assets/icons/icon-16x16.png"
-          alt="logo"
-        />
-        <h1>Redirect switch</h1>
+      <header class="header pl-3 mb-4">
+        <v-row
+          align="center"
+          justify="start"
+          style="gap: 10px"
+        >
+          <img
+            src="@/assets/icons/icon-16x16.png"
+            alt="logo"
+          />
+          <h1 class="text-h6">Redirect switch</h1>
+        </v-row>
       </header>
 
       <rule-list>
