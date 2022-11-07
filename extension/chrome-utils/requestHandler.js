@@ -56,41 +56,11 @@ function createDynamicRule(rule) {
 
 /**
  *
- * @returns {Promise<DynamicRule[]>}
- */
-export function getDynamicRules() {
-  return new Promise((resolve, reject) => {
-    try {
-      chrome.declarativeNetRequest.getDynamicRules(resolve);
-    } catch (error) {
-      reject(error);
-    }
-  });
-}
-
-/**
- *
- * @param {LocalRule[]} unfilteredRules
- * @param {string} key
- * @param {any} value
+ * @param {LocalRule[]} rules
  * @returns {LocalRule[]}
  */
-function getFilteredRules(unfilteredRules, key, value) {
-  return unfilteredRules.filter((rule) => rule[key] === value);
-}
-
-/**
- *
- * @param {LocalRule[]} activeRules
- */
-async function getActiveRulesNotInserted(activeRules) {
-  const dynamicRules = await getDynamicRules();
-
-  return activeRules.filter((activeRule) => {
-    return !dynamicRules.find(
-      (dynamicRule) => dynamicRule.id === activeRule.id
-    );
-  });
+function getActiveRulesList(rules) {
+  return rules.filter((rule) => rule.active);
 }
 
 /**
@@ -100,16 +70,17 @@ async function getActiveRulesNotInserted(activeRules) {
  */
 export async function saveRules(rules) {
   try {
-    const activeRules = getFilteredRules(rules, 'active', true);
-    const rulesNotInserted = await getActiveRulesNotInserted(activeRules);
-    const inactiveRules = getFilteredRules(rules, 'active', false);
+    const activeList = getActiveRulesList(rules);
 
     const updateRuleOptions = {
-      addRules: rulesNotInserted.map(createDynamicRule),
-      removeRuleIds: inactiveRules.map((rule) => rule.id),
+      removeRuleIds: rules.map((rule) => rule.id),
+      addRules: activeList.map(createDynamicRule),
     };
 
-    return chrome.declarativeNetRequest.updateDynamicRules(updateRuleOptions);
+    chrome.declarativeNetRequest.updateDynamicRules(updateRuleOptions);
+    // TODO: remove this debug logs and add URL validation to input
+    console.log(updateRuleOptions);
+    chrome.declarativeNetRequest.getDynamicRules(console.log);
   } catch (error) {
     console.log(error);
   }
