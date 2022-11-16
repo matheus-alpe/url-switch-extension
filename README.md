@@ -4,17 +4,12 @@ Project created by [Matheus Alves](https://github.com/matheus-alpe) (Dev), [Rafa
 
 ![Extension](/readme-assets/Example.png)
 
-Working with [Manifest V2](https://developer.chrome.com/docs/extensions/mv2/manifest/) and [Material 2](https://material.io/) ([Vuetify](https://vuetifyjs.com/))
+Working with [Manifest V3](https://developer.chrome.com/docs/extensions/mv3/manifest/) and [Material 2](https://material.io/) ([Vuetify](https://vuetifyjs.com/))
 
 
 ## Project setup
 ```
 yarn install
-```
-
-### Compiles and hot-reloads for development
-```
-yarn serve
 ```
 
 ### Compiles and minifies for production
