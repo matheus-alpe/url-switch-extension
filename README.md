@@ -1,26 +1,35 @@
-## Redirect Switch - A simple extension that redirect requests
+# Extension Typescript Template
 
-Project created by [Matheus Alves](https://github.com/matheus-alpe) (Dev), [Rafael Paludo](https://github.com/RafaPaludo) (Dev) and [Aline Rocha](https://github.com/nesouro) (Product Design) from a necessity encountered in their day to day work: lack of good and easy to use redirect extensions for chrome.
+## Production
 
-![Extension](/readme-assets/Example.png)
+Build the application for production:
 
-Working with [Manifest V3](https://developer.chrome.com/docs/extensions/mv3/manifest/) and [Material 2](https://material.io/) ([Vuetify](https://vuetifyjs.com/))
-
-
-## Project setup
-```
-yarn install
+```bash
+pnpm build:all
 ```
 
-### Compiles and minifies for production
+<br/>
+
+## Development
+
+#### 1 - Install dependencies
+
 ```
-yarn build
+  pnpm install
 ```
 
-### Lints and fixes files
+#### 2.1 - Only layout
+
 ```
-yarn lint
+  pnpm dev
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+#### 2.2 - Test extension
+
+1. Env:
+    - For load unpacked extension `pnpm build:all`
+    - For load only backend `pnpm build:ext`
+2. On Chrome, go to `Manage Extensions`;
+3. Enable `Developer Mode`;
+4. Click on `Load unpacked`;
+5. Select `dist` folder generated from first step;
