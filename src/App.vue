@@ -2,6 +2,8 @@
 import { ref, onBeforeMount } from 'vue'
 import { storage, closeView } from './utils'
 
+import FormView from './pages/FormView.vue'
+
 const KEY = 'rules'
 const rules = ref<Object[]>([])
 
@@ -24,43 +26,6 @@ onBeforeMount(async () => {
       @click="closeView"
     />
 
-    <VForm>
-      <VContainer>
-        <VRow class="input-row">
-          <VCol cols="6">
-            <VTextField
-              label="original url"
-              required
-            />
-          </VCol>
-
-          <VIcon
-            class="sep"
-            icon="mdi-chevron-right"
-          />
-
-          <VCol cols="6">
-            <VTextField
-              label="redirect to"
-              required
-            />
-          </VCol>
-        </VRow>
-      </VContainer>
-    </VForm>
+    <FormView />
   </div>
 </template>
-
-<style lang="scss">
-.input-row {
-  position: relative;
-
-  .v-icon {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 30px;
-    opacity: 0.5;
-  }
-}
-</style>
