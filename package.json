@@ -11,7 +11,9 @@
     "clear": "rm -rf ./dist"
   },
   "dependencies": {
-    "vue": "^3.2.45"
+    "@mdi/font": "^7.4.47",
+    "vue": "^3.2.45",
+    "vuetify": "^3.5.14"
   },
   "devDependencies": {
     "@types/chrome": "^0.0.217",
