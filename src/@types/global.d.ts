@@ -1,6 +1,5 @@
 type Rule = {
   id: number
-  priority?: number
   action: RuleAction
   condition: RuleCondition
 }

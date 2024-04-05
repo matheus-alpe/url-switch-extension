@@ -9,10 +9,14 @@ const emit = defineEmits<{
 }>()
 
 const { form, resetForm } = useForm()
+
+function submit() {
+  console.log(...arguments)
+}
 </script>
 
 <template>
-  <VForm>
+  <VForm @submit.prevent="submit">
     <VContainer>
       <InputRow
         v-model:from-url="form.fromUrl"
@@ -24,10 +28,10 @@ const { form, resetForm } = useForm()
 
         <div class="grid">
           <VCheckbox
-            v-for="r in resourceTypes"
-            :key="r"
-            :label="r"
-            :value="r"
+            v-for="(label, key) in resourceTypes"
+            :key="key"
+            :label="label"
+            :value="key"
             :hide-details="true"
             v-model="form.resources"
           />
@@ -49,6 +53,7 @@ const { form, resetForm } = useForm()
           <VBtn
             prepend-icon="mdi-content-save"
             variant="tonal"
+            type="submit"
           >
             Save
           </VBtn>

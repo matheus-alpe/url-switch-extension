@@ -1,6 +1,10 @@
 <script lang="ts" setup>
 const fromUrl = defineModel('fromUrl')
 const toUrl = defineModel('toUrl')
+
+const rules = {
+  required: (value: string) => !!value || 'Required',
+}
 </script>
 
 <template>
@@ -8,7 +12,9 @@ const toUrl = defineModel('toUrl')
     <VCol cols="6">
       <VTextField
         v-model="fromUrl"
+        :rules="[rules.required]"
         label="original url"
+        placeholder="https://www.google.com"
         required
       />
     </VCol>
@@ -20,8 +26,10 @@ const toUrl = defineModel('toUrl')
 
     <VCol cols="6">
       <VTextField
-        label="redirect to"
         v-model="toUrl"
+        :rules="[rules.required]"
+        label="redirect to"
+        placeholder="https://duckduckgo.com/"
         required
       />
     </VCol>
