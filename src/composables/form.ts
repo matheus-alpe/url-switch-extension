@@ -27,7 +27,6 @@ export const resourceTypes: { [key in ResourceType]: string } = {
 }
 
 export function useForm<T>() {
-  // TODO: add validation
   const form = reactive<RuleForm>({
     id: Date.now(),
     fromUrl: '',

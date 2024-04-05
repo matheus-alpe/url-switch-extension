@@ -15,6 +15,7 @@ const rules = {
         :rules="[rules.required]"
         label="original url"
         placeholder="https://www.google.com"
+        color="surface"
         required
       />
     </VCol>
@@ -30,6 +31,7 @@ const rules = {
         :rules="[rules.required]"
         label="redirect to"
         placeholder="https://duckduckgo.com/"
+        color="surface"
         required
       />
     </VCol>

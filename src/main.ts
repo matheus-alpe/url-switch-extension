@@ -13,6 +13,23 @@ import './style.css'
 const vuetify = createVuetify({
   components,
   directives,
+
+  theme: {
+    themes: {
+      light: {
+        colors: {
+          surface: '#14859E',
+        },
+      },
+
+      dark: {
+        colors: {
+          surface: '#14859E',
+        },
+      },
+    },
+  },
+
   icons: {
     defaultSet: 'mdi',
     aliases,

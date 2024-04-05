@@ -2,7 +2,9 @@
 import { ref, onBeforeMount } from 'vue'
 import { storage, closeView } from './utils'
 
-import FormView from './pages/FormView.vue'
+import { PAGES, type AvailablePages } from './pages'
+
+const currentPage = ref<AvailablePages>('ListView')
 
 const KEY = 'rules'
 const rules = ref<Object[]>([])
@@ -26,6 +28,6 @@ onBeforeMount(async () => {
       @click="closeView"
     />
 
-    <FormView />
+    <component :is="PAGES[currentPage]" />
   </div>
 </template>

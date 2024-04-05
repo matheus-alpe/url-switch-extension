@@ -34,6 +34,7 @@ function submit() {
             :value="key"
             :hide-details="true"
             v-model="form.resources"
+            color="surface"
           />
         </div>
       </div>
@@ -52,7 +53,6 @@ function submit() {
         <VCol cols="auto">
           <VBtn
             prepend-icon="mdi-content-save"
-            variant="tonal"
             type="submit"
           >
             Save

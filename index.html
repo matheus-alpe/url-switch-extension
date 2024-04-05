@@ -11,11 +11,74 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0"
     />
+    <style>
+      body {
+        margin: 0;
+      }
+
+      .loader-container {
+        display: grid;
+        place-items: center;
+
+        &.initial {
+          min-height: 100dvh;
+        }
+      }
+
+      .loader {
+        width: 60px;
+        height: 20px;
+        display: grid;
+        color: #14859e;
+
+        &:before,
+        &:after {
+          content: '';
+          grid-area: 1/1;
+          --c: #0000 calc(100% / 3), #14859e 0 calc(2 * 100% / 3), #0000 0;
+          --c1: linear-gradient(90deg, var(--c));
+          --c2: linear-gradient(0deg, var(--c));
+          background: var(--c1), var(--c2), var(--c1), var(--c2);
+          background-size: 300% 4px, 4px 300%;
+          background-repeat: no-repeat;
+          animation: l15 1.5s infinite;
+        }
+
+        &:after {
+          animation-delay: -0.75s;
+        }
+      }
+
+      @keyframes l15 {
+        0% {
+          background-position: 50% 0, 100% 100%, 0 100%, 0 0;
+        }
+        25% {
+          background-position: 0 0, 100% 50%, 0 100%, 0 0;
+        }
+        50% {
+          background-position: 0 0, 100% 0, 50% 100%, 0 0;
+        }
+        75% {
+          background-position: 0 0, 100% 0, 100% 100%, 0 50%;
+        }
+        75.01% {
+          background-position: 100% 0, 100% 0, 100% 100%, 0 50%;
+        }
+        100% {
+          background-position: 50% 0, 100% 0, 100% 100%, 0 100%;
+        }
+      }
+    </style>
     <title>Redirect Switch Extension</title>
   </head>
 
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <div class="loader-container initial">
+        <div class="loader"></div>
+      </div>
+    </div>
     <script
       type="module"
       src="/src/main.ts"
