@@ -1,4 +1,4 @@
-import { reactive } from 'vue'
+import { ref } from 'vue'
 
 export type RuleForm = {
   id: number
@@ -27,7 +27,7 @@ export const resourceTypes: { [key in ResourceType]: string } = {
 }
 
 export function useForm<T>() {
-  const form = reactive<RuleForm>({
+  const form = ref<RuleForm>({
     id: Date.now(),
     fromUrl: '',
     toUrl: '',
@@ -36,11 +36,11 @@ export function useForm<T>() {
   })
 
   function resetForm() {
-    form.id = Date.now()
-    form.fromUrl = ''
-    form.toUrl = ''
-    form.resources = []
-    form.active = true
+    form.value.id = Date.now()
+    form.value.fromUrl = ''
+    form.value.toUrl = ''
+    form.value.resources = []
+    form.value.active = true
   }
 
   return {

@@ -1,33 +1,50 @@
 <script lang="ts" setup>
 import { ref, onBeforeMount } from 'vue'
 import { storage, closeView } from './utils'
+import { useChangePage } from './pages'
+import { type RuleForm } from './composables/form'
 
-import { PAGES, type AvailablePages } from './pages'
-
-const currentPage = ref<AvailablePages>('ListView')
+const { pageComponent, changePage } = useChangePage('ListView')
 
 const KEY = 'rules'
-const rules = ref<Object[]>([])
+const rules = ref<RuleForm[]>([])
 
-async function save() {
+async function save(rule: RuleForm) {
+  console.log('save', rule)
   // TODO: implement save rules
+  rules.value.push(rule)
   await storage.set(KEY, rules.value)
 }
 
 onBeforeMount(async () => {
-  const value = await storage.get<Object[]>(KEY)
+  const value = await storage.get<RuleForm[]>(KEY)
   rules.value = value || []
 })
 </script>
 
 <template>
-  <div class="container">
+  <VContainer class="container">
     <VBtn
+      class="close"
       icon="mdi-close"
       variant="plain"
       @click="closeView"
     />
 
-    <component :is="PAGES[currentPage]" />
-  </div>
+    <component
+      :is="pageComponent"
+      @save="save"
+      @change-view="changePage"
+    />
+  </VContainer>
 </template>
+
+<style lang="scss" scoped>
+.container {
+  .close {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+}
+</style>
