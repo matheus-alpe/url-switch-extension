@@ -8,9 +8,9 @@ export async function inject() {
     return
   }
 
-  injectContentScript(tabId, 'content.js')
-    .then(() => console.log('injected'))
-    .catch(() => createTab('/index.html?ext-closable=true'))
+  injectContentScript(tabId, 'content.js').catch(() =>
+    createTab('/index.html?ext-closable=true')
+  )
 }
 
 export async function handler({ message }: { message: string }) {

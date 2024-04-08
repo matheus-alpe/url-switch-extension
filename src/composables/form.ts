@@ -26,13 +26,13 @@ export const resourceTypes: { [key in ResourceType]: string } = {
   other: 'Other',
 }
 
-export function useForm<T>() {
+export function useForm(rule: RuleForm | null) {
   const form = ref<RuleForm>({
-    id: Date.now(),
-    fromUrl: '',
-    toUrl: '',
-    resources: [],
-    active: true,
+    id: rule?.id || Date.now(),
+    fromUrl: rule?.fromUrl || '',
+    toUrl: rule?.toUrl || '',
+    resources: rule?.resources || [],
+    active: rule && typeof rule.active === 'boolean' ? rule.active : true,
   })
 
   function resetForm() {

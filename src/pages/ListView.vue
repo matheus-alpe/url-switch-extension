@@ -1,12 +1,32 @@
 <script lang="ts" setup>
-import { defineComponent } from 'vue'
+import useRulesStore from '../stores/rules'
 import { type ChangeView } from './index'
-defineEmits<ChangeView>()
+import { type RuleForm } from '../composables/form'
+
+import ListItem from '../components/ListItem.vue'
+
+const emit = defineEmits<ChangeView>()
+
+const { rules, save, remove, currentRule } = useRulesStore()
+
+function edit(rule: RuleForm) {
+  currentRule.value = Object.assign({}, rule)
+  emit('change-view', 'FormView')
+}
 </script>
 
 <template>
   <div>
-    <VRow> </VRow>
+    <div class="container-list">
+      <ListItem
+        v-for="(rule, index) in rules"
+        :key="rule.id"
+        :rule="rule"
+        @activate="save"
+        @edit="edit"
+        @delete="remove(index)"
+      />
+    </div>
 
     <VRow justify="end">
       <VCol cols="auto">

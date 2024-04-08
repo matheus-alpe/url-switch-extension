@@ -1,4 +1,16 @@
 <script lang="ts" setup>
+defineProps({
+  hideDetails: {
+    type: Boolean,
+    default: false,
+  },
+
+  readonly: {
+    type: Boolean,
+    default: false,
+  },
+})
+
 const fromUrl = defineModel('fromUrl')
 const toUrl = defineModel('toUrl')
 
@@ -13,10 +25,12 @@ const rules = {
       <VTextField
         v-model="fromUrl"
         :rules="[rules.required]"
+        :hide-details="hideDetails"
         label="original url"
         placeholder="https://www.google.com"
+        variant="outlined"
         color="surface"
-        required
+        :readonly="readonly"
       />
     </VCol>
 
@@ -29,10 +43,12 @@ const rules = {
       <VTextField
         v-model="toUrl"
         :rules="[rules.required]"
+        :hide-details="hideDetails"
         label="redirect to"
         placeholder="https://duckduckgo.com/"
+        variant="outlined"
         color="surface"
-        required
+        :readonly="readonly"
       />
     </VCol>
   </VRow>
