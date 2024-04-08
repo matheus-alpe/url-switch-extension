@@ -17,7 +17,7 @@ function edit(rule: RuleForm) {
 
 <template>
   <div>
-    <div class="container-list">
+    <div class="container-list my-4">
       <ListItem
         v-for="(rule, index) in rules"
         :key="rule.id"

@@ -21,12 +21,6 @@ const vuetify = createVuetify({
           surface: '#14859E',
         },
       },
-
-      dark: {
-        colors: {
-          surface: '#14859E',
-        },
-      },
     },
   },
 

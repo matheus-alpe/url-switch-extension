@@ -13,6 +13,10 @@ const { pageComponent, changePage } = useChangePage('ListView')
       variant="plain"
       @click="closeView"
     />
+    <header>
+      <img src="../public/favicon-32x32.png" />
+      <h1>URL Switch</h1>
+    </header>
 
     <component
       :is="pageComponent"
@@ -27,6 +31,23 @@ const { pageComponent, changePage } = useChangePage('ListView')
     position: absolute;
     right: 0;
     top: 0;
+  }
+
+  header {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 20px;
+
+    img {
+      $size: 26px;
+      width: $size;
+      height: $size;
+    }
+
+    h1 {
+      font-size: 18px;
+      color: #4f4f4f;
+    }
   }
 }
 </style>
