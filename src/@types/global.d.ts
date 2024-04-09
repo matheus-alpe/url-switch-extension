@@ -1,21 +1,3 @@
-type Rule = {
-  id: number
-  action: RuleAction
-  condition: RuleCondition
-}
-
-type RuleAction = {
-  redirect: {
-    url: string
-  }
-  type: 'redirect'
-}
-
-type RuleCondition = {
-  urlFilter: string
-  resourceTypes: ResourceType
-}
-
 type ResourceType =
   | 'main_frame'
   | 'sub_frame'
@@ -32,3 +14,14 @@ type ResourceType =
   | 'webtransport'
   | 'webbundle'
   | 'other'
+
+type RuleForm = {
+  id: number
+  apiId?: number
+  fromUrl: string
+  toUrl: string
+  resources: ResourceType[]
+  active: boolean
+}
+
+type RULES_KEY = 'rules'

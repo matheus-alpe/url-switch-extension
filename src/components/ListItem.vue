@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { type RuleForm } from '../composables/form'
 import InputRow from './InputRow.vue'
 
 defineProps<{

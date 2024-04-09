@@ -1,6 +1,5 @@
-import { ref, toRaw, unref } from 'vue'
+import { ref, toRaw } from 'vue'
 import { storage } from '../utils'
-import { type RuleForm } from '../composables/form'
 
 function rulesStore() {
   const KEY = 'rules'
@@ -12,10 +11,15 @@ function rulesStore() {
   })
 
   async function save() {
-    await storage.set(KEY, toRaw(rules.value))
+    const mappedRules = rules.value.map((rule) => ({
+      ...rule,
+      resources: toRaw(rule.resources),
+    }))
+    await storage.set(KEY, mappedRules)
   }
 
   function create(rule: RuleForm): Promise<void> {
+    rule.apiId = rules.value.length + 1
     rules.value.push(rule)
     return save()
   }
@@ -28,6 +32,8 @@ function rulesStore() {
     const index = findById(rule.id)
     if (index === -1) return Promise.reject()
 
+    console.log(rule)
+    // TODO: fix apiId
     rules.value.splice(index, 1, rule)
     return save()
   }

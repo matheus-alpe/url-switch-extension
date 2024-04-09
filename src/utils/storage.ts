@@ -19,6 +19,7 @@ export function set<T>(key: string, value: T) {
   return new Promise((resolve, reject) => {
     try {
       if (process.env.NODE_ENV !== 'development') {
+        console.log(value)
         chrome.storage.sync.set({ [key]: value }, () => resolve(true))
         return
       }

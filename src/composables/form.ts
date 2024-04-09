@@ -1,13 +1,5 @@
 import { ref } from 'vue'
 
-export type RuleForm = {
-  id: number
-  fromUrl: string
-  toUrl: string
-  resources: ResourceType[]
-  active: boolean
-}
-
 export const resourceTypes: { [key in ResourceType]: string } = {
   main_frame: 'Main Frame',
   sub_frame: 'Sub Frame',

@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import useRulesStore from '../stores/rules'
 import { type ChangeView } from './index'
-import { type RuleForm } from '../composables/form'
 
 import ListItem from '../components/ListItem.vue'
 

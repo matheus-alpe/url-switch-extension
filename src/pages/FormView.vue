@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { unref } from 'vue'
-import { resourceTypes, useForm, RuleForm } from '../composables/form'
+import { resourceTypes, useForm } from '../composables/form'
 import useLoading from '../composables/loading'
 import useRulesStore from '../stores/rules'
 
