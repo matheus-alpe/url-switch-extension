@@ -14,7 +14,7 @@ const { pageComponent, changePage } = useChangePage('ListView')
       @click="closeView"
     />
     <header>
-      <img src="../public/favicon-32x32.png" />
+      <img src="/favicon-32x32.png" />
       <h1>URL Switch</h1>
     </header>
 

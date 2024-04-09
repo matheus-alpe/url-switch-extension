@@ -1,6 +1,5 @@
 function createIframe() {
-
-  const CONTAINER_ID = 'extension-redirect-switch'
+  const CONTAINER_ID = 'extension-url-switch'
   const iframeAlreadyExist = document.getElementById(CONTAINER_ID)
   if (iframeAlreadyExist) {
     chrome.runtime.sendMessage({ message: 'close-modal' })

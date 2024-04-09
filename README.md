@@ -1,4 +1,4 @@
-# Extension Typescript Template
+# Extension URL Switch
 
 ## Production
 

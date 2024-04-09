@@ -1,5 +1,5 @@
 {
-  "name": "chrome-extension-redirect-switch",
+  "name": "chrome-extension-url-switch",
   "description": "Simple redirect extension",
   "private": true,
   "version": "1.0.0",
@@ -27,7 +27,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/matheus-alpe/redirect-switch-extension.git"
+    "url": "git+https://github.com/matheus-alpe/url-switch-extension.git"
   },
   "keywords": [
     "Chrome",
@@ -38,7 +38,7 @@
   "author": "Matheus Alves Pereira | @matheus-alpe",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/matheus-alpe/redirect-switch-extension/issues"
+    "url": "https://github.com/matheus-alpe/url-switch-extension/issues"
   },
-  "homepage": "https://github.com/matheus-alpe/redirect-switch-extension#readme"
+  "homepage": "https://github.com/matheus-alpe/url-switch-extension#readme"
 }

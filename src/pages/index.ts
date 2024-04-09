@@ -3,18 +3,21 @@ import { computed, defineAsyncComponent, ref } from 'vue'
 import Loader from '../components/Loader.vue'
 
 function importAsync(path: string) {
-  return defineAsyncComponent({
-    loader: () => import(/* @vite-ignore */ path),
-    loadingComponent: Loader,
-  })
+  return
 }
 
 const PAGES = {
-  ListView: importAsync('./ListView.vue'),
-  FormView: importAsync('./FormView.vue'),
+  ListView: defineAsyncComponent({
+    loader: () => import('./ListView.vue'),
+    loadingComponent: Loader,
+  }),
+  FormView: defineAsyncComponent({
+    loader: () => import('./FormView.vue'),
+    loadingComponent: Loader,
+  }),
 }
 
-export type AvailablePages = keyof typeof PAGES
+export type AvailablePages = 'ListView' | 'FormView'
 
 export type ChangeView = {
   (e: 'change-view', id: AvailablePages): void

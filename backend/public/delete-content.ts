@@ -1,5 +1,5 @@
-; (function deleteIframe() {
-  const CONTAINER_ID = 'extension-redirect-switch'
+;(function deleteIframe() {
+  const CONTAINER_ID = 'extension-url-switch'
   const iframeAlreadyExist = document.getElementById(CONTAINER_ID)
   iframeAlreadyExist && iframeAlreadyExist.remove()
 })()
