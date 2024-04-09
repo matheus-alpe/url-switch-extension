@@ -14,7 +14,7 @@ function createIframe() {
   iframe.setAttribute('id', CONTAINER_ID)
   iframe.setAttribute(
     'style',
-    'border: 0; position: fixed; top: 0; left: 0; height: 100%; width: 100%; overflow: hidden; z-index: 100000; background: transparent;'
+    'border: 0; position: fixed; top: 0; left: 0; height: 100%; width: 100%; overflow: hidden; z-index: 100000; background: transparent; color-scheme: auto; backdrop-filter: blur(3px);'
   )
 
   return iframe
