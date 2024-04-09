@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build:ext": "vue-tsc && vite build -c backend/extension.vite.config.ts",
+    "build:backend": "vue-tsc && vite build -c backend/extension.vite.config.ts",
     "build:all": "vue-tsc && vite build && vite build -c backend/extension.vite.config.ts",
     "clear": "rm -rf ./dist"
   },

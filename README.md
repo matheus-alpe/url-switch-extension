@@ -18,7 +18,7 @@ pnpm build:all
   pnpm install
 ```
 
-#### 2.1 - Only layout
+#### 2.1 - Layout development only
 
 ```
   pnpm dev
@@ -28,7 +28,7 @@ pnpm build:all
 
 1. Env:
     - For load unpacked extension `pnpm build:all`
-    - For load only backend `pnpm build:ext`
+    - For load only backend `pnpm build:backend`
 2. On Chrome, go to `Manage Extensions`;
 3. Enable `Developer Mode`;
 4. Click on `Load unpacked`;
