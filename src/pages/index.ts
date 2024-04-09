@@ -28,7 +28,8 @@ export function useChangePage(initialPage: AvailablePages) {
 
   const pageComponent = computed(() => PAGES[currentPage.value])
 
-  function changePage(page: AvailablePages) {
+  function changePage(...args: unknown[]) {
+    const page = args[0] as AvailablePages
     currentPage.value = page
   }
 

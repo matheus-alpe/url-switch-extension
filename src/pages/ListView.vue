@@ -16,8 +16,11 @@ function edit(rule: RuleForm) {
 </script>
 
 <template>
-  <div>
-    <div class="container-list my-4">
+  <div :class="{ empty: !rules.length }">
+    <div
+      v-if="rules.length"
+      class="container-list my-4"
+    >
       <ListItem
         v-for="(rule, index) in rules"
         :key="rule.id"
@@ -34,9 +37,41 @@ function edit(rule: RuleForm) {
           prepend-icon="mdi-plus"
           @click="$emit('change-view', 'FormView')"
         >
-          Create New
+          {{ rules.length ? 'Create New' : 'Create First Redirect' }}
         </VBtn>
       </VCol>
     </VRow>
   </div>
 </template>
+
+<style lang="scss" scoped>
+.container-list {
+  max-height: 400px;
+  overflow-x: hidden;
+  overflow-y: visible;
+  padding: 5px 0;
+
+  /* width */
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 8px;
+    border: 1px solid #e5e5e5;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background: #c4c4c4;
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: #adadad;
+  }
+}
+</style>

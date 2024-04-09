@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import { ref, toRaw, unref } from 'vue'
 import { storage } from '../utils'
 import { type RuleForm } from '../composables/form'
 
@@ -12,7 +12,7 @@ function rulesStore() {
   })
 
   async function save() {
-    await storage.set(KEY, rules.value)
+    await storage.set(KEY, toRaw(rules.value))
   }
 
   function create(rule: RuleForm): Promise<void> {
