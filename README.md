@@ -1,15 +1,21 @@
 # Extension URL Switch
 
-## Production
+![application demo](./readme/demo.gif)
 
-Build the application for production:
+This extension allows you to set URL redirects in chrome browser.
 
-```bash
-pnpm build:all
-```
 
-<br/>
+---
+## Used Technologies
+- Vue 3
+- Typescript
+- Vuetify
+- Material Design 3
+- Manifest 3
+- Chrome API
 
+
+---
 ## Development
 
 #### 1 - Install dependencies
@@ -33,3 +39,12 @@ pnpm build:all
 3. Enable `Developer Mode`;
 4. Click on `Load unpacked`;
 5. Select `dist` folder generated from first step;
+
+---
+## Production
+
+Build the application for production:
+
+```bash
+pnpm build:all
+```
