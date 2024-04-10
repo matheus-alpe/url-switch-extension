@@ -22,17 +22,20 @@ function getActiveRulesList(rules: RuleForm[]) {
   return rules.filter((rule) => rule.active)
 }
 
+let CACHE_IDS: number[] = []
 async function saveRules(rules: RuleForm[]) {
   try {
     const activeList = getActiveRulesList(rules)
+    const ruleIds = rules.map((rule) => rule.id)
 
     const updateRuleOptions: chrome.declarativeNetRequest.UpdateRuleOptions = {
-      removeRuleIds: rules.map((rule) => rule.id),
+      removeRuleIds: [...ruleIds, ...CACHE_IDS],
       addRules: activeList.map(createDynamicRule),
     }
     console.log(updateRuleOptions)
 
     await chrome.declarativeNetRequest.updateDynamicRules(updateRuleOptions)
+    CACHE_IDS = ruleIds
   } catch (e) {
     console.log(e)
   }
