@@ -32,7 +32,6 @@ async function saveRules(rules: RuleForm[]) {
       removeRuleIds: [...ruleIds, ...CACHE_IDS],
       addRules: activeList.map(createDynamicRule),
     }
-    console.log(updateRuleOptions)
 
     await chrome.declarativeNetRequest.updateDynamicRules(updateRuleOptions)
     CACHE_IDS = ruleIds
