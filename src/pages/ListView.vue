@@ -3,6 +3,7 @@ import useRulesStore from '../stores/rules'
 import { type ChangeView } from './index'
 
 import ListItem from '../components/ListItem.vue'
+import Sponsors from '../components/Sponsors.vue'
 
 const emit = defineEmits<ChangeView>()
 
@@ -30,7 +31,9 @@ function edit(rule: RuleForm) {
       />
     </div>
 
-    <VRow justify="end">
+    <VRow justify="space-between">
+      <Sponsors />
+
       <VCol cols="auto">
         <VBtn
           prepend-icon="mdi-plus"
@@ -43,7 +46,7 @@ function edit(rule: RuleForm) {
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .container-list {
   max-height: 400px;
   overflow-x: hidden;
@@ -71,6 +74,10 @@ function edit(rule: RuleForm) {
   /* Handle on hover */
   &::-webkit-scrollbar-thumb:hover {
     background: #adadad;
+  }
+
+  .list-item > .v-col {
+    padding-left: 0;
   }
 }
 </style>

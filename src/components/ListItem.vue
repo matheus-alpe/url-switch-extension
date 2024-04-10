@@ -14,7 +14,7 @@ defineEmits<{
 
 <template>
   <div class="list-item">
-    <VCol cols="10">
+    <VCol>
       <InputRow
         hide-details
         readonly
@@ -24,7 +24,7 @@ defineEmits<{
     </VCol>
 
     <VCol
-      cols="2"
+      cols="auto"
       class="actions"
     >
       <VSwitch
