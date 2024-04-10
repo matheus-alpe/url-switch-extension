@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { URL_REGEX } from '../utils'
+
 defineProps({
   hideDetails: {
     type: Boolean,
@@ -14,9 +16,10 @@ defineProps({
 const fromUrl = defineModel('fromUrl')
 const toUrl = defineModel('toUrl')
 
-const rules = {
-  required: (value: string) => !!value || 'Required',
-}
+const rules = [
+  (value: string) => !!value || 'Required',
+  (value: string) => URL_REGEX.test(value) || 'Invalid URL',
+]
 </script>
 
 <template>
@@ -24,7 +27,7 @@ const rules = {
     <VCol cols="6">
       <VTextField
         v-model="fromUrl"
-        :rules="[rules.required]"
+        :rules="rules"
         :hide-details="hideDetails"
         label="original url"
         placeholder="https://www.google.com"
@@ -42,7 +45,7 @@ const rules = {
     <VCol cols="6">
       <VTextField
         v-model="toUrl"
-        :rules="[rules.required]"
+        :rules="rules"
         :hide-details="hideDetails"
         label="redirect to"
         placeholder="https://duckduckgo.com/"
