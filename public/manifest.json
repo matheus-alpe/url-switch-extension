@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "Redirect Switch",
-  "description": "A simple redirect extension.",
+  "name": "URL Switch",
+  "description": "A simple URL redirect extension.",
   "author": "Matheus Alves Pereira - https://github.com/matheus-alpe",
   "version": "1.0.0",
   "host_permissions": [
