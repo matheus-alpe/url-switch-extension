@@ -96,11 +96,15 @@ onBeforeUnmount(reset)
         </VBtn>
       </VCol>
 
-      <VCol cols="auto">
+      <VCol
+        cols="auto"
+        class="submit-button"
+      >
         <VBtn
           :loading="saving"
           prepend-icon="mdi-content-save"
           type="submit"
+          :disabled="!form.resources.length"
         >
           Save
         </VBtn>
@@ -119,5 +123,9 @@ onBeforeUnmount(reset)
     display: grid;
     grid-template-columns: repeat(3, 1fr);
   }
+}
+
+.submit-button:has(.v-btn--disabled) {
+  cursor: not-allowed;
 }
 </style>
