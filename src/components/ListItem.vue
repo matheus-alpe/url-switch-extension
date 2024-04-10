@@ -13,7 +13,7 @@ defineEmits<{
 </script>
 
 <template>
-  <VRow class="list-item">
+  <div class="list-item">
     <VCol cols="10">
       <InputRow
         hide-details
@@ -54,11 +54,14 @@ defineEmits<{
         </VList>
       </VMenu>
     </VCol>
-  </VRow>
+  </div>
 </template>
 
 <style lang="scss" scoped>
 .list-item {
+  display: flex;
+  align-items: center;
+
   .actions {
     display: flex;
     justify-content: space-around;
