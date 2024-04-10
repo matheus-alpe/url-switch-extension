@@ -56,7 +56,10 @@ onBeforeUnmount(reset)
 </script>
 
 <template>
-  <VForm @submit.prevent="submit">
+  <VForm
+    @submit.prevent="submit"
+    class="has-rules"
+  >
     <InputRow
       ref="inputRow"
       v-model:from-url="form.fromUrl"

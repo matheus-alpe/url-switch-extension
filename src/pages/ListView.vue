@@ -15,7 +15,7 @@ function edit(rule: RuleForm) {
 </script>
 
 <template>
-  <div :class="{ empty: !rules.length }">
+  <div>
     <div
       v-if="rules.length"
       class="container-list my-4"

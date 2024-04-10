@@ -1,6 +1,5 @@
 #app-url-switch {
   background-color: #fff;
-  width: 97%;
   border-radius: 4px;
   position: absolute;
   top: 10px;
@@ -9,7 +8,8 @@
     0 16px 24px 0 #00000024;
   max-width: fit-content;
 
-  &:not(:has(.empty)) {
+  &:has(.has-rules) {
     max-width: 850px;
+    width: 97%;
   }
 }

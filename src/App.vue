@@ -1,8 +1,11 @@
 <script lang="ts" setup>
 import { closeView } from './utils'
 import { useChangePage } from './pages'
+import useRulesStore from './stores/rules'
 
 const { pageComponent, changePage } = useChangePage('ListView')
+
+const { rules } = useRulesStore()
 </script>
 
 <template>
@@ -18,10 +21,12 @@ const { pageComponent, changePage } = useChangePage('ListView')
       <h1>URL Switch</h1>
     </header>
 
-    <component
-      :is="pageComponent"
-      @change-view="changePage"
-    />
+    <div :class="{ 'has-rules': rules.length }">
+      <component
+        :is="pageComponent"
+        @change-view="changePage"
+      />
+    </div>
   </VContainer>
 </template>
 
