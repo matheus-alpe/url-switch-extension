@@ -7,9 +7,9 @@
   right: 10px;
   box-shadow: 0 8px 10px 0 #00000033, 0 6px 30px 0 #0000001f,
     0 16px 24px 0 #00000024;
-  max-width: 850px;
+  max-width: fit-content;
 
-  &:has(.empty) {
-    max-width: fit-content;
+  &:not(:has(.empty)) {
+    max-width: 850px;
   }
 }
