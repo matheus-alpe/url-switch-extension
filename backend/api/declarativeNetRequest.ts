@@ -2,7 +2,7 @@ import { changeExtensionIcon } from './action'
 
 function createDynamicRule(rule: RuleForm): chrome.declarativeNetRequest.Rule {
   return {
-    id: rule.apiId!,
+    id: rule.id,
     priority: 1,
     action: {
       type: chrome.declarativeNetRequest.RuleActionType.REDIRECT,
@@ -27,7 +27,7 @@ async function saveRules(rules: RuleForm[]) {
     const activeList = getActiveRulesList(rules)
 
     const updateRuleOptions: chrome.declarativeNetRequest.UpdateRuleOptions = {
-      removeRuleIds: rules.map((rule) => rule.apiId!),
+      removeRuleIds: rules.map((rule) => rule.id),
       addRules: activeList.map(createDynamicRule),
     }
     console.log(updateRuleOptions)

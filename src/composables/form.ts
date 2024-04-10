@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import { ref, type Ref } from 'vue'
 
 export const resourceTypes: { [key in ResourceType]: string } = {
   main_frame: 'Main Frame',
@@ -18,9 +18,9 @@ export const resourceTypes: { [key in ResourceType]: string } = {
   other: 'Other',
 }
 
-export function useForm(rule: RuleForm | null) {
+export function useForm(rule: RuleForm | null, rules: Ref<RuleForm[]>) {
   const form = ref<RuleForm>({
-    id: rule?.id || Date.now(),
+    id: rule?.id || getNextId(),
     fromUrl: rule?.fromUrl || '',
     toUrl: rule?.toUrl || '',
     resources: rule?.resources || [],
@@ -28,11 +28,18 @@ export function useForm(rule: RuleForm | null) {
   })
 
   function resetForm() {
-    form.value.id = Date.now()
+    form.value.id = getNextId()
     form.value.fromUrl = ''
     form.value.toUrl = ''
     form.value.resources = []
     form.value.active = true
+  }
+
+  function getNextId() {
+    const length = rules.value.length
+    const lastRule = length && rules.value[length - 1]
+    if (!lastRule) return 1
+    return lastRule.id + 1
   }
 
   return {

@@ -17,8 +17,8 @@ type Actions = {
 
 const emit = defineEmits<Actions & ChangeView>()
 
-const { currentRule, create, update, removeById } = useRulesStore()
-const { form, resetForm } = useForm(unref(currentRule))
+const { currentRule, create, update, removeById, rules } = useRulesStore()
+const { form, resetForm } = useForm(unref(currentRule), rules)
 const { loading: saving, setLoading: setSaving } = useLoading()
 const { loading: deleting, setLoading: setDeleting } = useLoading()
 

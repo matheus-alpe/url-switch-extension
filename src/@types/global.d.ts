@@ -17,11 +17,8 @@ type ResourceType =
 
 type RuleForm = {
   id: number
-  apiId?: number
   fromUrl: string
   toUrl: string
   resources: ResourceType[]
   active: boolean
 }
-
-type RULES_KEY = 'rules'
