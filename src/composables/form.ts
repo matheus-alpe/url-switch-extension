@@ -1,7 +1,7 @@
 import { ref, type Ref } from 'vue'
 
 export const resourceTypes: { [key in ResourceType]: string } = {
-  main_frame: 'Main Frame',
+  main_frame: 'Main Frame (URL)',
   sub_frame: 'Sub Frame',
   stylesheet: 'Stylesheet',
   script: 'Script',

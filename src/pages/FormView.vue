@@ -67,7 +67,7 @@ onBeforeUnmount(reset)
     />
 
     <div class="checkboxes-container my-4">
-      <VLabel>Filter:</VLabel>
+      <VLabel>Apply to:</VLabel>
 
       <div class="grid">
         <VCheckbox
