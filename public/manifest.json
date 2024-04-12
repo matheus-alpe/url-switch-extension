@@ -3,7 +3,7 @@
   "name": "URL Switch",
   "description": "A simple URL redirect extension.",
   "author": "Matheus Alves Pereira - https://github.com/matheus-alpe",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "host_permissions": [
     "<all_urls>"
   ],
