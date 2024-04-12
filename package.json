@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "vite",
     "build:backend": "vue-tsc && vite build -c backend/extension.vite.config.ts",
-    "build:all": "vue-tsc && vite build && vite build -c backend/extension.vite.config.ts",
+    "build:all": "vue-tsc && vite build && vite build -c backend/extension.vite.config.ts && cd dist && zip -r url-switch .",
     "clear": "rm -rf ./dist"
   },
   "dependencies": {
